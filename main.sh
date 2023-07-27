@@ -8,7 +8,7 @@ nocolour="\033[00m"
 if [[ -d /home/aswathy/testing ]];then
 echo -e $warning file exist $nocolour
 else 
-mkdir /home/aswathy/testing
+mkdir -p /home/aswathy/testing
 echo -e $success directory created $nocolour
 fi
 if [[ -f home/aswathy/testing/latest.zip ]];then
