@@ -5,7 +5,7 @@ warning="\033[1;33m"
 error="\033[1;31m"
 nocolour="\033[00m"
 
-if [[ -f /home/aswathy/testing ]];then
+if [[ -f /home/aswathy/testing/latest.zip ]];then
   echo -e $alert file exist $nocolour
 elif [[ ! -f /home/aswathy/testing ]];then 
   echo -e $alert Do you want to install wordpress ? $nocolour
