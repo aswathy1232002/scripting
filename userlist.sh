@@ -7,30 +7,23 @@ error="\033[1;31m"
 nocolour="\033[00m"
 
 if [[ $EUID -eq 0 ]];then
-
- if [[ -f /var/userlist ]];then
-   echo -e $alert File Exist $nocolour
-    else 
-     touch /var/userlist
-     vim adduser.txt
-     users=$(cat adduser.txt | tr 'A-Z' 'a-z' )
-        declare -A user_passwords
-     for user in $users
+    if [[ -f /var/userlist ]];then
+    echo -e $error File Exists $nocolour
+    else
+    touch /var/userlist
+    vim useradd.txt
+    username=$( cat useradd.txt | tr 'A-Z' 'a-z' )
+    for users in $username
         do
-         useradd -m $user
-        password=$(openssl rand -base64 12)
-             user_passwords["$user"]=$password
-      echo "$user:$password" | chpasswd  
-         echo "$user:$password" >> /var/userlist 
-    done
-      fi
+        useradd -m $users
+        passwd=$(cat /dev/urandom | tr -dc '[:alnum:][:punct:]' | fold -w 12 | head -n 1)
+        echo " $users - $passwd " >> /var/userlist
+        done
+    fi
 else
-  echo -e "${error}You must run this script as root.${nocolour}"
-  exit 1
+echo -e $warning Run in sudo mode $nocolour
 fi
 
 
-
-      
-
-
+         
+    
