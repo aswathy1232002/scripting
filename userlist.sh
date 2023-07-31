@@ -8,6 +8,7 @@ nocolour="\033[00m"
 
 if [[ $EUID -eq 0 ]];then
     if [[ -f /var/userlist ]];then
+<<<<<<< HEAD
     echo -e $error File Exists $nocolour
     else
     touch /var/userlist
@@ -18,6 +19,18 @@ if [[ $EUID -eq 0 ]];then
         useradd -m $users
         passwd=$(cat /dev/urandom | tr -dc '[:alnum:][:punct:]' | fold -w 12 | head -n 1)
         echo " $users - $passwd " >> /var/userlist
+=======
+    echo -e $warning File Exists $nocolour
+    else
+    touch /var/userlist
+    vim users.txt
+    username=$( cat users.txt | tr 'A-Z' 'a-z' )
+    for user in $username
+        do
+        useradd -m $user
+        password=$(cat /dev/urandom | tr -dc '[:alnum:][:punct:]' | fold -w 12 | head -n 1)
+        echo " $user - $password " >> /var/userlist
+>>>>>>> e834e5ee970f94163e65196ab208d9b24dc84691
         done
     fi
 else
@@ -26,4 +39,8 @@ fi
 
 
          
+<<<<<<< HEAD
     
+=======
+    
+>>>>>>> e834e5ee970f94163e65196ab208d9b24dc84691
